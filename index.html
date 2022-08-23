@@ -28,7 +28,11 @@
 		  </div>
 		  <iframe id="container" allow="autoplay" style="height:720px;width:1280px"></iframe>
 		  <script type="module">
-			import Hyperbeam from "https://unpkg.com/@hyperbeam/web@latest/dist/index.js"
+			const Hyperbeam = (
+	await eval(
+	  `import("https://unpkg.com/@hyperbeam/web@latest/dist/index.js")`
+	)
+  ).default;
 			// TODO: Set the embedURL variable
 			const embedURL = "https://1n3gz1hpcnqdu0d7un7mi7olf.hyperbeam.com/qPvw8gzcRjOQPbpg__C-KQ?token=EAi_wKrJjSYL_CQQhAmvR4NR_NWPX158lmEs4nkT2Hc"
 			const hb = await Hyperbeam(container, embedURL)
