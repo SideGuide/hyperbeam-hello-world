@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hyperbeam — Hello World</title>
+		<meta name="description" content="Add any application to your Metaverse using Hyperbeam. Ditch screenshare and run Chrome in 3D spaces for interactive demos. Play and synchronize media from any website like YouTube and Soundcloud. Get started for free here: https://hyperbeam.com/">
+		<meta property="og:description" content="Add any application to your Metaverse using Hyperbeam. Ditch screenshare and run Chrome in 3D spaces for interactive demos. Play and synchronize media from any website like YouTube and Soundcloud. Get started for free at hyperbeam.com">
+		<meta property="og:title" content="Hyperbeam — Embed virtual computers in Three.js">
+		<meta property="og:image" content="https://raw.githubusercontent.com/hyperbeam/threejs-example/master/meta.png">
+		<meta property="og:url" content="https://threejs-example.hyperbeam.com">
+		<meta property="og:site_name" content="Hyperbeam">
+		<meta property="og:type" content="website">
+		<meta name="theme-color" content="#ff889b">
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@hyperbeamapi">
+		<link href="https://hyperbeam.com/images/favicon.png" rel="shortcut icon" type="image/x-icon">
+	</head>
+	<body>
+		<div style="font-family: Arial">
+			<button id="reload">Reload</button>
+			<button id="back">Go Back</button>
+			<button id="forward">Go Forward</button>
+			<button id="youtube">Open Youtube.com</button>
+			Volume: <input type="range" min="0" max="100" value="100" id="range">
+			<p>User ID: <span id="userId"></span></p>
+			<p>Current website: <span id="currentSite"></p>
+		  </div>
+		  <iframe id="container" allow="autoplay" style="height:720px;width:1280px"></iframe>
+		  <script type="module">
+			import Hyperbeam from "https://unpkg.com/@hyperbeam/web@latest/dist/index.js"
+			// TODO: Set the embedURL variable
+			const embedURL = "https://1n3gz1hpcnqdu0d7un7mi7olf.hyperbeam.com/qPvw8gzcRjOQPbpg__C-KQ?token=EAi_wKrJjSYL_CQQhAmvR4NR_NWPX158lmEs4nkT2Hc"
+			const hb = await Hyperbeam(container, embedURL)
+			userId.innerText = hb.userId
+			reload.addEventListener("click", () => {
+			  hb.tabs.reload()
+			})
+			back.addEventListener("click", () => {
+			  hb.tabs.goBack()
+			})
+			forward.addEventListener("click", () => {
+			  hb.tabs.goForward()
+			})
+			youtube.addEventListener("click", () => {
+			  hb.tabs.update({ url: "https://youtube.com" })
+			})
+			range.addEventListener("change", (e) => {
+			  hb.volume = e.target.value / 100
+			})
+			hb.tabs.onUpdated.addListener((tabId, changeInfo) => {
+			  if (changeInfo.title) {
+				currentSite.innerText = changeInfo.title
+			  }
+			})
+		  </script>
+	</body>
+</html>
